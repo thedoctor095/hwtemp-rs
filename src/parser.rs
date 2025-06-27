@@ -10,7 +10,6 @@ pub struct Properties {
 }
 
 
-// fixed size static array known at compile time
 pub static BASE_PATTERNS: [&str; 2]= [
     "/sys/class/hwmon/hwmon*/temp*_*", "/sys/class/hwmon/hwmon*/device/temp*_*"
     ];
@@ -66,8 +65,7 @@ pub fn parse_temps(hwmons: &HashSet<String>) -> HashMap<String, Vec<Properties>>
             .to_owned())
             .parent()
             .unwrap()
-            .join("name"
-        );
+            .join("name");
         let label_path = PathBuf::from(
             hwmon
             .to_owned() + "_label"
@@ -97,10 +95,7 @@ pub fn parse_temps(hwmons: &HashSet<String>) -> HashMap<String, Vec<Properties>>
             critical_temp: read_temp(crit_temp_path) 
         };
 
-        res
-        .entry(unit_name)
-        .or_insert_with(Vec::new)
-        .push(properties);
+        res.entry(unit_name).or_insert_with(Vec::new).push(properties);
     }
     return res;
 }
@@ -123,11 +118,8 @@ pub fn fetch_temps(interval: Option<u64>) -> Option<HashMap<String, Vec<Properti
 
     let hwmons = retrieve_paths();
     if !hwmons.is_empty() {
-        // TODO: work on streaming results;
-        loop {
-            let temps = parse_temps(&hwmons);
-            return Some(temps);
-        }
+        let temps = parse_temps(&hwmons);
+        return Some(temps);
     } else {
         eprintln!("Could not retrieve paths from either of {:?}", BASE_PATTERNS);
         return None;

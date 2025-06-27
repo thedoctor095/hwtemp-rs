@@ -1,5 +1,4 @@
 pub mod parser;
-pub mod structs;
 
 use parser::{Properties, fetch_temps};
 use std::{collections::HashMap, iter::from_fn};
