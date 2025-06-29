@@ -43,8 +43,8 @@ pub fn retrieve_paths() -> HashSet<String>{
 pub fn normalize(entry: &PathBuf) -> String {
     if let Some(path) = entry.to_str() {
         return path
-        .split("_")
-        .next()
+        .rsplitn(2, "_")
+        .nth(1)
         .unwrap_or_default()
         .to_string();
     } else {
@@ -106,7 +106,7 @@ pub fn read_temp(path: PathBuf) -> f64 {
             return content
                     .trim()
                     .parse::<f64>()
-                    .expect("Could not parse temp file contents") / 1000.0;
+                    .unwrap_or(0.0) / 1000.0;
     } else {
             return 0.0;
     }
