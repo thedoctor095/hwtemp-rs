@@ -5,7 +5,6 @@ authors = ["The Doctor", "thedoctor095@yahoo.com"]
 edition = "2024"
 readme = "README.md"
 repository = "https://github.com/thedoctor095/hwtemp-rs"
-license = "Apache License 2.0"
 license-file = "LICENSE"
 
 [dependencies]
