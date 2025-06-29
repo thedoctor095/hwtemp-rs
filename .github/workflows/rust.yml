@@ -15,15 +15,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     # - name: Build
     #   run: cargo build --verbose
     - name: Print working directory
       run: pwd
-      working-directory: hwtemp-rs
     - name: List files
       run: ls
-      working-directory: hwtemp-rs
     - name: Run tests
       run: cargo test --verbose
-      working-directory: hwtemp-rs
