@@ -18,5 +18,9 @@ jobs:
     # - uses: actions/checkout@v4
     # - name: Build
     #   run: cargo build --verbose
+    - name: Print working directory
+      run: pwd
+    - name: List files
+      run: ls
     - name: Run tests
       run: cargo test --verbose
