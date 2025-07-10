@@ -32,12 +32,12 @@ mod tests {
     #[test]
     fn test_successful_normalize() {
         let entry = &PathBuf::from("tests/test_temps/test_temp1");
-        assert_eq!(normalize(entry), "tests/test_temps/test");
+        assert_eq!(normalize(entry), "tests/test");
     }
 
     // test will fail locally but succeed on a system without hwmon interface
     #[test]
     fn test_failed_fetch_temps() {
-        assert!(fetch_temps(Some(0)).is_none());
+        assert!(fetch_temps().is_none());
     }
 }
