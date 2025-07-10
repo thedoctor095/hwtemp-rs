@@ -29,7 +29,7 @@ TODO: add static mode usage
 
 ## Contributing
 
-Feel free to contribute to Sk by opening issues, submitting pull requests, or suggesting improvements.
+Feel free to contribute to **hwtemp-rs** by opening issues, submitting pull requests, or suggesting improvements.
 
 ## License
 
