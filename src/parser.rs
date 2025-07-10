@@ -1,12 +1,13 @@
 use glob;
-use std::{collections::{HashMap, HashSet}, fs::read_to_string, path::PathBuf, thread::sleep, time::Duration};
+use std::{collections::{HashMap, HashSet}, fs::read_to_string, path::PathBuf};
 
 #[derive(Debug)]
 pub struct Properties {
     pub label: String,
     pub current_temp: f64,
     pub max_temp: f64,
-    pub critical_temp: f64
+    pub critical_temp: f64,
+    pub sensor_path: String
 }
 
 
@@ -43,8 +44,8 @@ pub fn retrieve_paths() -> HashSet<String>{
 pub fn normalize(entry: &PathBuf) -> String {
     if let Some(path) = entry.to_str() {
         return path
-        .rsplitn(2, "_")
-        .nth(1)
+        .split("_")
+        .next()
         .unwrap_or_default()
         .to_string();
     } else {
@@ -92,9 +93,9 @@ pub fn parse_temps(hwmons: &HashSet<String>) -> HashMap<String, Vec<Properties>>
                     .to_string(),
             current_temp: read_temp(temp_path), 
             max_temp: read_temp(max_temp_path), 
-            critical_temp: read_temp(crit_temp_path) 
+            critical_temp: read_temp(crit_temp_path),
+            sensor_path: hwmon.to_owned() + "_*"
         };
-
         res.entry(unit_name).or_insert_with(Vec::new).push(properties);
     }
     return res;
@@ -112,10 +113,7 @@ pub fn read_temp(path: PathBuf) -> f64 {
     }
 }
 
-pub fn fetch_temps(interval: Option<u64>) -> Option<HashMap<String, Vec<Properties>>> {
-    let interval = interval.unwrap_or(0) * 1000;
-    sleep(Duration::from_millis(interval));
-
+pub fn fetch_temps() -> Option<HashMap<String, Vec<Properties>>> {
     let hwmons = retrieve_paths();
     if !hwmons.is_empty() {
         let temps = parse_temps(&hwmons);
@@ -125,4 +123,3 @@ pub fn fetch_temps(interval: Option<u64>) -> Option<HashMap<String, Vec<Properti
         return None;
     }
 }
-
