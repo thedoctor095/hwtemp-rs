@@ -37,7 +37,7 @@ fn fetch() {
 ```
 use hwtemp_rs::{from_func, HWProperties};
 
-fn _fetch()-> HWProperties {
+fn fetch()-> HWProperties {
     // retrieve temps once
     return from_func();
 }
@@ -198,4 +198,4 @@ Feel free to contribute to **hwtemp-rs** by opening issues, submitting pull requ
 This project is licensed under the Apache-2.0 - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgements
-Project inspiration was taken from [psutil](https://github.com/giampaolo/psutil)
+Project was inspired from Python's [psutil (process and system utilities)](https://github.com/giampaolo/psutil)
