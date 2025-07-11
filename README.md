@@ -1,7 +1,7 @@
 <p align="center">
     <a href="https://opensource.org/licenses/Apache-2.0" alt="Apache 2.0 License">
         <img src="https://img.shields.io/badge/License-Apache_2.0-orange.svg" /></a>
-    <a href="https://www.rust-lang.org/tools/install" alt="Rust 1.83.0">
+    <a href="https://www.rust-lang.org/tools/install" alt="Rust 1.88.0">
         <img src="https://img.shields.io/badge/Rust-1.83.0-orange.svg" /></a>
 </p>
 
